@@ -20,21 +20,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 1. Menggunakan Official Action untuk menginstal uv
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      # 2. Setup Python 3.12.7
       - name: Set up Python 3.12.7
         uses: actions/setup-python@v5
         with:
           python-version: '3.12.7'
 
-      - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
-
+      # 3. Instal dependencies (sekarang command 'uv' otomatis dikenali)
       - name: Install Dependencies
-        run: |
-          $HOME/.cargo/bin/uv pip install --system pandas numpy scikit-learn
+        run: uv pip install --system pandas numpy scikit-learn
 
+      # 4. Eksekusi Script
       - name: Execute Preprocessing Script
-        run: python preprocessing/automate_Dymasius-Rendragraha.py
+        run: python preprocessing/automate_Nama-siswa.py
 
+      # 5. Commit & Push Data
       - name: Commit and Push Processed Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
