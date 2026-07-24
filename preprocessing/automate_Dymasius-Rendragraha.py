@@ -2,6 +2,8 @@ import pandas as pd
 import os
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
+# Preprocessing otomatis
+
 def run_preprocessing(train_path, test_path, output_dir):
     print("Memulai proses data preprocessing...")
     
